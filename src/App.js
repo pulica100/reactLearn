@@ -1,26 +1,56 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to relaoad.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+const lower = 'lower';
+const upper = 'upper';
+
+class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = { message: "" };
+
+  }
+  converter(action) {
+   let message = this.state.message;
+
+    switch (action) {
+      case lower:
+        console.log('sapatinho');
+        message = message.toLowerCase();
+        break;
+      case upper:
+        console.log('sapatograndão');
+        message = message.toUpperCase();
+        break;
+      default:
+        break;
+    }
+    this.setState({message});
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <textarea onChange={(evt) => {
+          let m = evt.target.value;
+          this.setState({ message: m });
+
+        }} className="textarea" value={this.state.message}></textarea>
+        <div>
+          <button onClick={() => { this.converter(lower) }}>lowercase</button>
+          <button onClick={() => { this.converter(upper) }}>UPPERCASE</button>
+
+        </div>
+
+
+
+      </div>
+    );
+  }
 }
+
 
 export default App;
